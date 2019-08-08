@@ -1,0 +1,32 @@
+import * as React from "react";
+import { render } from "react-dom";
+import { run } from "./test";
+
+import "./styles.css";
+
+const Grid = props => <div className="grid">{props.children}</div>;
+const Header = props => <div className="header">{props.children}</div>;
+
+const Results = props => (
+  <>
+    <div key={0}>{props.name}</div>
+    <div key={1}>{props.elapsed} ms</div>
+  </>
+);
+
+const ITERATIONS = 10000;
+
+const results = run(ITERATIONS);
+
+const App = () => (
+  <Grid>
+    <Header>Medium</Header>
+    <Header>Elapsed {ITERATIONS} ITERATIONS</Header>
+    <Results name="Object" elapsed={results.object.duration} />
+    <Results name="Local Storage" elapsed={results.localStorage.duration} />
+    <Results name="Cookies" elapsed={results.cookies.duration} />
+  </Grid>
+);
+
+const rootElement = document.getElementById("root");
+render(<App />, rootElement);
