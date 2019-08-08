@@ -1,0 +1,52 @@
+<script>
+
+        Benchmark.prototype.setup = function() {
+
+          
+  dummy = {}
+  function setDummy (i) {
+    dummy[i] = i + i + i
+  }
+  function readDummy (i) {
+    return dummy[i]
+  }
+  function setLS (i) {
+    localStorage.setItem(i, i + i + i)
+  }
+  function readLS (i) {
+    return localStorage.getItem(i)
+  }
+  function makeSet (count) {
+    var s = []
+    for (var i = 0; i < count; i++) {
+      s.push("" + i + i)
+    }
+    return s
+  }
+  set1 = makeSet(10)
+  set2 = makeSet(100)
+
+        
+  };
+          
+
+
+
+        Benchmark.prototype.teardown = function() {
+
+          
+  dummy = {}
+  function clearLocalStorage (s) {
+    for (var i = 0; i < s.length; i++) {
+      localStorage.removeItem(s[i])
+    }
+  }
+  clearLocalStorage(set1)
+  clearLocalStorage(set2)
+  
+
+        
+  };
+
+      
+</script>
